@@ -1,23 +1,28 @@
-import { Header } from "@/components/header"
-import { HeroSection } from "@/components/hero-section"
-import { VideoSection } from "@/components/video-section"
-import { JourneySection } from "@/components/journey-section"
-import { ServicesSection } from "@/components/services-section"
-import { CTASection } from "@/components/cta-section"
-import { TestimonialsSection } from "@/components/testimonials-section"
-import { Footer } from "@/components/footer"
+'use client';
 
-export default function HomePage() {
+import dynamic from 'next/dynamic';
+import HeroSection from "@/components/hero-section";
+import ServicesSection from "@/components/services-section";
+import BrandsSection from "@/components/brands-section";
+import { JourneySection } from "@/components/journey-section";
+import { VideoSection } from "@/components/video-section";
+import TestimonialsSection from "@/components/testimonials-section";
+import { StatsSection } from "@/components/stats-section";
+import ContactForm from "@/components/contact-form";
+import { CTASection } from "@/components/cta-section";
+
+export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
+    <main className="flex min-h-screen flex-col">
       <HeroSection />
-      <VideoSection />
-      <JourneySection />
+      <StatsSection />
       <ServicesSection />
-      <CTASection />
+      <JourneySection />
+      <VideoSection />
       <TestimonialsSection />
-      <Footer />
-    </div>
-  )
+      <BrandsSection />
+      <CTASection />
+      <ContactForm />
+    </main>
+  );
 }

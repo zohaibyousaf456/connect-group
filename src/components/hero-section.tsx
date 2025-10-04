@@ -1,111 +1,201 @@
-import { Button } from "@/components/ui/button"
+'use client';
 
-export function HeroSection() {
+import { motion } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+
+export default function HeroSection() {
   return (
-    <section className="bg-gray-50 py-20">
-      <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="text-sm text-gray-600 font-medium mb-4 uppercase tracking-wider">
-              ONE ROOF. INFINITE POSSIBILITIES.
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 text-balance leading-tight">
-              Unleash Your Potential With
-            </h1>
-            <h2 className="text-4xl md:text-5xl font-bold text-red-500 mb-6">Connect Group.</h2>
-            <p className="text-xl text-gray-900 mb-8">
-              We Provide <span className="text-red-500 font-semibold">Business Solutions</span>
-            </p>
-            <Button className="bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-full text-lg">
-              Contact us
-            </Button>
+    <section className="relative min-h-screen bg-gray-900 text-white overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" />
+      
+      {/* Animated background elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse delay-1000" />
+      </div>
+
+      {/* Welcome text */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="container mx-auto px-4 pt-32 text-center relative z-10"
+      >
+        <h2 className="text-xl text-blue-400 font-medium mb-2">Welcome to</h2>
+        <h1 className="text-6xl font-bold text-white mb-4">Connect Group</h1>
+        <p className="text-lg text-blue-400">Scroll to see how we connect possibilities</p>
+      </motion.div>
+
+      {/* Main content */}
+      <div className="flex-1 flex items-center py-20">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, delay: 0.3 }}
+              className="text-center lg:text-left space-y-8"
+            >
+              <h2 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight">
+                We created
+                <br />
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500">
+                  A Modern Business Ecosystem,
+                </span>
+                <br />
+                Built for What&apos;s Next
+              </h2>
+              <p className="text-xl text-gray-300 max-w-2xl leading-relaxed">
+                Through business setup, recruitment, visa services, mobility, and
+                global workforce solutions.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Link
+                    href="#contact"
+                    className="inline-flex items-center justify-center px-10 py-5 text-lg font-semibold rounded-full text-white bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
+                  >
+                    Let&apos;s Talk
+                  </Link>
+                </motion.div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{ duration: 1.2, delay: 0.5 }}
+              className="relative"
+            >
+              <div className="relative w-full aspect-square max-h-[700px]">
+                <Image
+                  src="/globe.svg"
+                  alt="Global Business"
+                  fill
+                  className="object-contain filter brightness-0 invert"
+                  priority
+                />
+                {/* Floating elements */}
+                <motion.div
+                  animate={{ 
+                    y: [0, -20, 0],
+                    rotate: [0, 5, 0]
+                  }}
+                  transition={{ 
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  className="absolute top-10 right-10 w-4 h-4 bg-blue-400 rounded-full"
+                />
+                <motion.div
+                  animate={{ 
+                    y: [0, 15, 0],
+                    rotate: [0, -5, 0]
+                  }}
+                  transition={{ 
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1
+                  }}
+                  className="absolute bottom-20 left-10 w-3 h-3 bg-purple-400 rounded-full"
+                />
+              </div>
+            </motion.div>
           </div>
 
-          <div className="relative">
-            <div className="relative h-96 w-full">
-              <div className="absolute inset-0 opacity-20">
-                <svg className="w-full h-full" viewBox="0 0 400 300" fill="none">
-                  {/* Dotted world map pattern */}
-                  {Array.from({ length: 50 }).map((_, row) =>
-                    Array.from({ length: 60 }).map((_, col) => {
-                      const x = col * 7
-                      const y = row * 6
-                      // Create a rough world map shape with dots
-                      const isLand =
-                        (x > 50 && x < 150 && y > 80 && y < 180) || // Europe/Africa
-                        (x > 200 && x < 350 && y > 60 && y < 200) || // Asia
-                        (x > 20 && x < 120 && y > 120 && y < 220) || // Americas
-                        (x > 280 && x < 380 && y > 180 && y < 250) // Australia
-                      return isLand ? <circle key={`${row}-${col}`} cx={x} cy={y} r="1" fill="#9CA3AF" /> : null
-                    }),
-                  )}
-                </svg>
-              </div>
+          {/* Launch, Scale, Succeed */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="mt-32 grid grid-cols-1 md:grid-cols-3 gap-12"
+          >
+            {[
+              { word: "Launch", delay: 1.0 },
+              { word: "Scale", delay: 1.2 },
+              { word: "Succeed", delay: 1.4 }
+            ].map((item, index) => (
+              <motion.div
+                key={item.word}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: item.delay }}
+                className="text-center group"
+              >
+                <motion.h3 
+                  className="text-6xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors duration-300"
+                  whileHover={{ scale: 1.05 }}
+                >
+                  {item.word}
+                </motion.h3>
+                {index === 2 && (
+                  <motion.p 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.8 }}
+                    className="text-xl text-gray-300 font-medium"
+                  >
+                    in the UAE with…
+                  </motion.p>
+                )}
+              </motion.div>
+            ))}
+          </motion.div>
 
-              <div className="absolute top-8 left-16 w-16 h-16 rounded-full overflow-hidden border-4 border-yellow-400">
-                <img src="/a.jpg" alt="Team member" className="w-full h-full object-cover" />
-              </div>
-
-              <div className="absolute top-16 right-8 w-20 h-20 rounded-full overflow-hidden border-4 border-green-400">
-                <img src="/b.jpg" alt="Team member" className="w-full h-full object-cover" />
-              </div>
-
-              <div className="absolute top-32 right-24 w-16 h-16 rounded-full overflow-hidden border-4 border-blue-400">
-                <img src="/c.jpg" alt="Team member" className="w-full h-full object-cover" />
-              </div>
-
-              <div className="absolute top-48 left-8 w-18 h-18 rounded-full overflow-hidden border-4 border-orange-400">
-                <img src="/e.jpg" alt="Team member" className="w-full h-full object-cover" />
-              </div>
-
-              <div className="absolute bottom-32 left-16 w-16 h-16 rounded-full overflow-hidden border-4 border-purple-400">
-                <img src="/f.jpg" alt="Team member" className="w-full h-full object-cover" />
-              </div>
-
-              <div className="absolute bottom-16 right-32 w-16 h-16 rounded-full overflow-hidden border-4 border-red-400">
-                <img src="/g.jpg" alt="Team member" className="w-full h-full object-cover" />
-              </div>
-
-              <div className="absolute bottom-8 right-8 w-14 h-14 rounded-full overflow-hidden border-4 border-green-500">
-                <img src="/a.jpg" alt="Team member" className="w-full h-full object-cover" />
-              </div>
-
-              <div className="absolute bottom-24 right-16 w-16 h-16 rounded-full overflow-hidden border-4 border-purple-500">
-                <img src="/b.jpg" alt="Team member" className="w-full h-full object-cover" />
-              </div>
-
-              <div className="absolute bottom-32 right-4 w-12 h-12 rounded-full overflow-hidden border-4 border-gray-400">
-                <img src="/c.jpg" alt="Team member" className="w-full h-full object-cover" />
-              </div>
-
-              {/* Central n:n logo */}
-              <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-gray-200">
-                <div className="text-red-500 font-bold text-lg">n:n</div>
-              </div>
-
-              {/* Dotted connection lines */}
-              <svg className="absolute inset-0 w-full h-full pointer-events-none">
-                <defs>
-                  <pattern id="dots" patternUnits="userSpaceOnUse" width="4" height="4">
-                    <circle cx="2" cy="2" r="1" fill="#9CA3AF" />
-                  </pattern>
-                </defs>
-
-                {/* Lines connecting profiles to center */}
-                <line x1="20%" y1="25%" x2="50%" y2="50%" stroke="url(#dots)" strokeWidth="2" />
-                <line x1="85%" y1="30%" x2="50%" y2="50%" stroke="url(#dots)" strokeWidth="2" />
-                <line x1="80%" y1="45%" x2="50%" y2="50%" stroke="url(#dots)" strokeWidth="2" />
-                <line x1="15%" y1="60%" x2="50%" y2="50%" stroke="url(#dots)" strokeWidth="2" />
-                <line x1="20%" y1="80%" x2="50%" y2="50%" stroke="url(#dots)" strokeWidth="2" />
-                <line x1="75%" y1="85%" x2="50%" y2="50%" stroke="url(#dots)" strokeWidth="2" />
-                <line x1="85%" y1="75%" x2="50%" y2="50%" stroke="url(#dots)" strokeWidth="2" />
-                <line x1="85%" y1="65%" x2="50%" y2="50%" stroke="url(#dots)" strokeWidth="2" />
-                <line x1="90%" y1="85%" x2="50%" y2="50%" stroke="url(#dots)" strokeWidth="2" />
-              </svg>
-            </div>
-          </div>
+          {/* Connect Group text */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 1.8 }}
+            className="mt-20 text-center"
+          >
+            <h2 className="text-7xl font-bold text-white mb-6">
+              Connect{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-300">
+                Group
+              </span>
+            </h2>
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2.2 }}
+              className="text-2xl text-gray-300"
+            >
+              We&apos;ll guide you there
+            </motion.p>
+          </motion.div>
         </div>
       </div>
+
+      {/* Decorative elements */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-900 to-transparent" />
+      
+      {/* Animated wave */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.5 }}
+        className="absolute -bottom-1 left-0 right-0"
+      >
+        <svg
+          viewBox="0 0 1440 120"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-full"
+        >
+          <path
+            d="M0 30L60 25C120 20 240 10 360 15C480 20 600 40 720 45C840 50 960 40 1080 35C1200 30 1320 30 1380 30L1440 30V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V30Z"
+            fill="#1f2937"
+          />
+        </svg>
+      </motion.div>
     </section>
-  )
+  );
 }
