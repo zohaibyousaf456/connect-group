@@ -17,7 +17,7 @@ export default function AboutPage() {
           <div className="container mx-auto px-4 relative">
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                About Us
+                About Ussssss
               </h1>
               <p className="text-xl text-gray-300 leading-relaxed">
                 Empowering businesses with world-class services in Dubai, Saudi Arabia & beyond since 2016.
